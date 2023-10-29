@@ -1,0 +1,83 @@
+## Appender da Console ##
+appender.console.type=Console
+appender.console.name=STDOUT
+appender.console.target=SYSTEM_OUT
+appender.console.layout.type=PatternLayout
+appender.console.layout.pattern=%d{dd-MM-yyyy||HH:mm:ss} %-5level %class{36} %L %M - %m%n
+appender.console.filter.threshold.type=LevelRangeFilter
+appender.console.filter.threshold.minLevel=off
+appender.console.filter.threshold.maxLevel=info
+
+## Appender Padrão ##
+appender.testedefault.type=RollingFile
+appender.testedefault.name=LogTesteDefault
+appender.testedefault.fileName=${sys:logFilePath}/defaultLogs/LogTesteDefault.log
+appender.testedefault.filePattern=${sys:logFilePath}/defaultLogs/LogTesteDefault.log
+appender.testedefault.layout.type=PatternLayout
+appender.testedefault.layout.pattern=%d{dd-MM-yyyy} %-5level %class{36} %L %M - %msg%xEx%n
+appender.testedefault.policies.type=Policies
+appender.testedefault.policies.size.type=OnStartupTriggeringPolicy
+appender.testedefault.filter.threshold.type=LevelRangeFilter
+appender.testedefault.filter.threshold.minLevel=error
+appender.testedefault.filter.threshold.maxLevel=info
+
+## Appender Padrão ##
+appender.outro.type=RollingFile
+appender.outro.name=outro
+appender.outro.fileName=${sys:logFilePath}/outroAppender/LogOutroAppender.log
+appender.outro.filePattern=${sys:logFilePath}/outroAppender/LogOutroAppender.log
+appender.outro.layout.type=PatternLayout
+appender.outro.layout.pattern=%d{dd-MM-yyyy} %-5level %class{36} %L %M - %msg%xEx%n
+appender.outro.policies.type=Policies
+appender.outro.policies.size.type=OnStartupTriggeringPolicy
+appender.outro.filter.threshold.type=LevelRangeFilter
+appender.outro.filter.threshold.minLevel=error
+appender.outro.filter.threshold.maxLevel=info
+
+## Tal qual o Appender Default, este appender será usado para gerar logs separadamente do LogTesteDefault ##
+appender.fatal.type=RollingFile
+appender.fatal.name=LogTesteFatal
+appender.fatal.fileName=${sys:logFilePath}/fatalLogs/LogTesteFatal.log
+appender.fatal.filePattern=${sys:logFilePath}/fatalLogs/LogTesteFatal.log
+appender.fatal.layout.type=PatternLayout
+appender.fatal.layout.pattern=%d{DEFAULT} %5p %t %c{4}:%L - %m%n
+appender.fatal.policies.type=Policies
+appender.fatal.policies.size.type=OnStartupTriggeringPolicy
+appender.fatal.filter.threshold.type=LevelRangeFilter
+appender.fatal.filter.threshold.minLevel=off
+appender.fatal.filter.threshold.maxLevel=fatal
+
+## Appender para logs de erro somente ##
+appender.error.type=RollingFile
+appender.error.name=LogTesteErrors
+appender.error.fileName=${sys:logFilePath}/errorsLog/LogTesteError.log
+appender.error.filePattern=${sys:logFilePath}/errorsLog/LogTesteError.log
+appender.error.layout.type=PatternLayout
+appender.error.layout.pattern=%d{DEFAULT} %5p %t %c{4}:%L - %m%n
+appender.error.policies.type=Policies
+appender.error.policies.size.type=OnStartupTriggeringPolicy
+appender.error.filter.threshold.type=LevelRangeFilter
+appender.error.filter.threshold.minLevel=off
+appender.error.filter.threshold.maxLevel=error
+
+################################################################
+## rootLogger specify all appender rollings used by your log4j2
+################################################################
+
+rootLogger.level=all
+## Somente appenderRef's que foram usados no log4j2
+#Neste caso, estamos usando todos que são parte desse exemplo
+rootLogger.appenderRefs=LogTesteFatal,LogTesteErrors,LogTesteDefault,ConsoleAppender,outro
+rootLogger.appenderRef.stdout.ref=STDOUT
+
+## Specify the default appenderRef and error appenderRef to automate logging ##
+## Especifica o appenderRef default
+rootLogger.appenderRef.testedefault.ref=LogTesteDefault
+rootLogger.appenderRef.outro.ref=outro
+
+
+## Especifica o appenderRef fatal
+rootLogger.appenderRef.fatal.ref=LogTesteFatal
+
+## Especifica o appenderRef errors
+rootLogger.appenderRef.error.ref=LogTesteErrors
