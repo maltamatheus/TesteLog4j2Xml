@@ -3,42 +3,69 @@
       <Appenders>
 
             <Console name="Console" target="SYSTEM_OUT">
-                  <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+                  <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] [%logger] %-5level %logger{36} - %msg%n" />
             </Console>
-
-            <RollingFile name="TesteLog" 
-                         fileName="${system:logFilePath}/Teste.log"
-                         filePattern="${system:logFilePath}/Teste.log">
+            <RollingFile name="LogPessoa"
+                         fileName="${sys:logFilePath}/LogPessoa.log"
+                         filePattern="${sys:logFilePath}/LogPessoa.log">
                   <PatternLayout pattern="%d %-5p %C{1} - %m%n"/>
                   <Policies>
                         <OnStartupTriggeringPolicy />
                   </Policies>
 				  <DefaultRolloverStrategy max="1"/>
             </RollingFile>
-
-<!-- 
-            <RollingFile name="TesteLog" 
-                         fileName="${sys:logFilePath}/logger.log"
-                         filePattern="${sys:logFilePath}/logger.log">
+            <RollingFile name="LogA"
+                         fileName="${sys:logFilePath}/LogA.log"
+                         filePattern="${sys:logFilePath}/LogA.log">
                   <PatternLayout pattern="%d %-5p %C{1} - %m%n"/>
                   <Policies>
                         <OnStartupTriggeringPolicy />
                   </Policies>
 				  <DefaultRolloverStrategy max="1"/>
             </RollingFile>
- -->
+            <RollingFile name="LogConsole"
+                         fileName="${sys:logFilePath}/LogConsole.log"
+                         filePattern="${sys:logFilePath}/LogConsole.log">
+                  <PatternLayout pattern="%d %-5p %C{1} - %m%n"/>
+                  <Policies>
+                        <OnStartupTriggeringPolicy />
+                  </Policies>
+				  <DefaultRolloverStrategy max="1"/>
+            </RollingFile>
+            <RollingFile name="LogConsoleError"
+                         fileName="${sys:logFilePath}/LogConsoleError.log"
+                         filePattern="${sys:logFilePath}/LogConsoleError.log">
+                  <PatternLayout pattern="%d %-5p %C{1} - %m%n"/>
+                  <Policies>
+                        <OnStartupTriggeringPolicy />
+                  </Policies>
+				  <DefaultRolloverStrategy max="1"/>
+            </RollingFile>
       </Appenders>
 
       <!-- LOGGER LIST -->
 
       <Loggers>
             <Root level="INFO">
-                  <AppenderRef ref="Console" />
-                  <AppenderRef ref="TesteLog"/>
-<!-- 
- -->
+                  <AppenderRef ref="Console"/>
+                  <AppenderRef ref="LogConsole"/>
+                  <AppenderRef ref="LogA"/>
+                  <AppenderRef ref="LogConsoleError" level="error"/>
             </Root>
-<!-- 
- -->
+            <Logger name="main.domains.Pessoa" level="info" additivity="false">
+               <AppenderRef ref="LogPessoa"/>
+            </Logger>
+            <Logger name="main.domains.ClasseA1" level="info" additivity="false">
+               <AppenderRef ref="LogA"/>
+            </Logger>
+            <Logger name="main.domains.ClasseA2" level="info" additivity="false">
+               <AppenderRef ref="LogA"/>
+            </Logger>
+            <Logger name="LogConsole" level="info" additivity="false">
+               <AppenderRef ref="LogConsole"/>
+            </Logger>
+            <Logger name="LogConsoleError" level="error" additivity="false">
+               <AppenderRef ref="LogConsoleError"/>
+            </Logger>
       </Loggers>
 </configuration>

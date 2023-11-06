@@ -19,4 +19,8 @@ public class LogConfig {
 		logger.fatal("Mensagem de Fatal");
 		logger.log(Level.OFF, "Mensagem de OFF");
 	}
+	
+	public void logGenerate(String logMessage) {
+		logger.info(logMessage);
+	}
 }

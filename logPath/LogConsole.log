@@ -1,0 +1,6 @@
+2023-10-30 21:43:13,872 INFO  LogConfig - Mensagem de Info
+2023-10-30 21:43:13,875 ERROR LogConfig - Mensagem de Erro
+2023-10-30 21:43:13,875 FATAL LogConfig - Mensagem de Fatal
+2023-10-30 21:43:13,876 OFF   LogConfig - Mensagem de OFF
+2023-10-30 21:43:13,879 INFO  Erros - Seta nome do Erro
+2023-10-30 21:43:13,879 ERROR Erros - Pega nome do Erro
